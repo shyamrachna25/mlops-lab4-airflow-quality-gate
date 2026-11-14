@@ -37,9 +37,17 @@ pattern used in this course's Docker lab (a build-stage gate) and MLflow lab
 mechanism rather than a Docker build stage or a model registry alias.
 
 **Tested evidence, this session:**
+- Threshold `0.99` (unreachable) → `check_quality_branch` routed to
+  `model_rejected_task` (success); `load_model_task` and `my_trigger_task`
+  both correctly show **skipped**, not failed or run:
 
-**Tested evidence, this session:**
+  ![Quality gate correctly rejecting a model](./screenshots/quality-gate-fail.png)
 
+- Threshold `0.85` → `check_quality_branch` routed to `load_model_task`
+  (success) → `my_trigger_task` (success); `model_rejected_task` correctly
+  shows **skipped**:
+
+  ![Quality gate correctly passing a model](./screenshots/quality-gate-pass.png)
 
 
 ### 2. The missing notification, finally wired up (bug fix)
